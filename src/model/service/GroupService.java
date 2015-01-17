@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import model.GroupChoiceGames;
 import model.GroupRoom;
 import model.Joiner_Info;
 import model.Member;
@@ -124,7 +125,7 @@ public class GroupService {
 		return grdao.findByGroupRoomName(bean.getGroupRoomName());
 	}
 
-	public List<GroupRoom> getGroupRooms(String unknown) {// 模糊查詢揪團房(非主鍵-unknown)--其實是查storeName,groupRoomName 
+	public List<GroupRoom> getGroupRooms(String unknown) {// 模糊查詢揪團房(非主鍵-unknown)--其實是查storeName,groupRoomName
 		List<GroupRoom> list = grdao.findByUnknown(unknown);
 		return list;
 	}
@@ -299,7 +300,8 @@ public class GroupService {
 		for (GroupRoom vo : list) {
 			System.out.println(vo.getGroupRoomName());
 			Set<Joiner_Info> jList = vo.getJoinerInfos();
-			for(Joiner_Info j: jList){
+			for (Joiner_Info j : jList) {
+				System.out.println(j.getJoinTime());
 				System.out.println(j.getUsername());
 			}
 		}
@@ -309,5 +311,12 @@ public class GroupService {
 		}
 		int count = service.countGroupRoomsMyJoined(member);
 		System.out.println(count);
+		// 查團所選的桌遊測試
+		GroupRoom gRoom = service.getOneGroupRoom(1);
+		Set<GroupChoiceGames> choiceGames = gRoom.getGroupChoiceGameses();
+		for (GroupChoiceGames vo : choiceGames) {
+			System.out.println(vo.getBoardGameName());		
+		}
+		System.out.println("測試完畢");
 	}
 }

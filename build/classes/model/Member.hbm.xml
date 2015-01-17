@@ -35,7 +35,7 @@
         <property name="idCard" type="string">
             <column name="idCard" length="20" not-null="true" />
         </property>
-        <property name="joinDate" type="timestamp">
+        <property name="joinDate" type="date">
             <column name="joinDate" length="23" />
         </property>
         <property name="phone" type="string">

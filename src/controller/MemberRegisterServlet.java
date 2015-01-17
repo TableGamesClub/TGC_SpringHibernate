@@ -26,7 +26,7 @@ import model.service.MemberService;
 
 @WebServlet(urlPatterns = { "/RegisterServletMB" })
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024 * 1024 * 500 * 5)
-public class RegisterServletMB extends HttpServlet {
+public class MemberRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request,
@@ -177,8 +177,8 @@ public class RegisterServletMB extends HttpServlet {
 				bean.setGender(gender);
 				bean.setNickname(nickname);
 				bean.setBirthday(java.sql.Date.valueOf(birthday));
-				bean.setIdCard(idCard);
-				bean.setJoinDate(java.sql.Date.valueOf(joinDate));
+				bean.setIdCard(idCard);			
+				bean.setJoinDate(new java.sql.Timestamp(java.sql.Date.valueOf(joinDate).getTime()));
 				bean.setPhone(phone);
 				bean.setMemberAddress(memberAddress);
 				bean.setImgFileName(filename);

@@ -14,11 +14,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<!-- 本機的MS SQL -->
-		<property name="url"
-		value="jdbc:sqlserver://localhost:1433;DatabaseName=TGC" />
-		<!-- 虛擬機器裡的MS SQL -->
 <!-- 		<property name="url" -->
-<!-- 			value="jdbc:sqlserver://192.168.111.128:1433;DatabaseName=TGC" /> -->
+<!-- 		value="jdbc:sqlserver://localhost:1433;DatabaseName=TGC" /> -->
+		<!-- 虛擬機器裡的MS SQL -->
+		<property name="url"
+			value="jdbc:sqlserver://192.168.111.128:1433;DatabaseName=TGC" />
 		<property name="username" value="sa" />
 		<property name="password" value="123456" />
 	</bean>
@@ -51,7 +51,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
 				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory
 				</prop>

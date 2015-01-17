@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,10 +32,10 @@ import model.service.GroupService;
 import model.service.MemberService;
 
 @WebServlet("/LoginMemberServlet.do")
-public class LoginMemberServlet extends HttpServlet {
+public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public LoginMemberServlet() {
+	public MemberLoginServlet() {
 		super();
 	}
 
@@ -98,6 +99,7 @@ public class LoginMemberServlet extends HttpServlet {
 			}
 
 			GroupService groupservice = new GroupService();
+			Set<GroupChoiceGames> choices = null;
 			List<Integer> type = null;
 			List<GroupRoom> memgroupall = groupservice
 					.getGroupRoomsMyJoined(mem);// 查到我所加的團
@@ -111,12 +113,14 @@ public class LoginMemberServlet extends HttpServlet {
 			BoardGameKindDAO_Interface bgkdao = (BoardGameKindDAO_Interface) context
 					.getBean("BoardGameKindDAO");
 			int groupSerialNumber = -1;
-			Map<String, Integer> map = new HashMap<>();
 			int i = 0;
 			int p = 0;
+			Map<String, Integer> map = new HashMap<>();
 			Map<String, String> typeList = new HashMap<>();
+			Map<String, Set<GroupChoiceGames>> choiceGames = new HashMap<>();
 			for (GroupRoom vo : memgroupall) {
 				groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
+				choices = vo.getGroupChoiceGameses();
 				List<Joiner_Info> ji = jidao
 						.findByGroupSerialNumber(groupSerialNumber);
 				int count = 0;
@@ -124,36 +128,47 @@ public class LoginMemberServlet extends HttpServlet {
 				// 用switch來判斷
 				switch (p) {
 				case 0:
+					choiceGames.put("choices0", choices);
 					map.put("count0", count);
 					break;
 				case 1:
+					choiceGames.put("choices1", choices);
 					map.put("count1", count);
 					break;
 				case 2:
+					choiceGames.put("choices2", choices);
 					map.put("count2", count);
 					break;
 				case 3:
+					choiceGames.put("choices3", choices);
 					map.put("count3", count);
 					break;
 				case 4:
+					choiceGames.put("choices4", choices);
 					map.put("count4", count);
 					break;
 				case 5:
+					choiceGames.put("choices5", choices);
 					map.put("count5", count);
 					break;
 				case 6:
+					choiceGames.put("choices6", choices);
 					map.put("count6", count);
 					break;
 				case 7:
+					choiceGames.put("choices7", choices);
 					map.put("count7", count);
 					break;
 				case 8:
+					choiceGames.put("choices8", choices);
 					map.put("count8", count);
 					break;
 				case 9:
+					choiceGames.put("choices9", choices);
 					map.put("count9", count);
 					break;
 				case 10:
+					choiceGames.put("choices10", choices);
 					map.put("count10", count);
 					break;
 				}
@@ -600,177 +615,178 @@ public class LoginMemberServlet extends HttpServlet {
 						o7++;
 					}
 					break;
-//				case 8:
-//					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
-//					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
-//					int o2 = 0;
-//					for (Integer t : type) {
-//						BoardGameKind kind = bgkdao.findByPrimeKey(t);
-//						switch (o2) { // 找到的類型放進typeList
-//						case 0:
-//							String kind0000 = kind.getBoardGameStyle();
-//							typeList.put("kind0000", kind0000);
-//							break;
-//						case 1:
-//							String kind0001 = kind.getBoardGameStyle();
-//							typeList.put("kind0001", kind0001);
-//							break;
-//						case 2:
-//							String kind0002 = kind.getBoardGameStyle();
-//							typeList.put("kind0002", kind0002);
-//							break;
-//						case 3:
-//							String kind0003 = kind.getBoardGameStyle();
-//							typeList.put("kind0003", kind0003);
-//							break;
-//						case 4:
-//							String kind0004 = kind.getBoardGameStyle();
-//							typeList.put("kind0004", kind0004);
-//							break;
-//						case 5:
-//							String kind0005 = kind.getBoardGameStyle();
-//							typeList.put("kind0005", kind0005);
-//							break;
-//						case 6:
-//							String kind0006 = kind.getBoardGameStyle();
-//							typeList.put("kind0006", kind0006);
-//							break;
-//						case 7:
-//							String kind0007 = kind.getBoardGameStyle();
-//							typeList.put("kind0007", kind0007);
-//							break;
-//						case 8:
-//							String kind0008 = kind.getBoardGameStyle();
-//							typeList.put("kind0008", kind0008);
-//							break;
-//						case 9:
-//							String kind0009 = kind.getBoardGameStyle();
-//							typeList.put("kind0009", kind0009);
-//							break;
-//						case 10:
-//							String kind0010 = kind.getBoardGameStyle();
-//							typeList.put("kind0010", kind0010);
-//							break;
-//						}
-//						o2++;
-//					}
-//					break;
-//				case 9:
-//					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
-//					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
-//					int o2 = 0;
-//					for (Integer t : type) {
-//						BoardGameKind kind = bgkdao.findByPrimeKey(t);
-//						switch (o2) { // 找到的類型放進typeList
-//						case 0:
-//							String kind0000 = kind.getBoardGameStyle();
-//							typeList.put("kind0000", kind0000);
-//							break;
-//						case 1:
-//							String kind0001 = kind.getBoardGameStyle();
-//							typeList.put("kind0001", kind0001);
-//							break;
-//						case 2:
-//							String kind0002 = kind.getBoardGameStyle();
-//							typeList.put("kind0002", kind0002);
-//							break;
-//						case 3:
-//							String kind0003 = kind.getBoardGameStyle();
-//							typeList.put("kind0003", kind0003);
-//							break;
-//						case 4:
-//							String kind0004 = kind.getBoardGameStyle();
-//							typeList.put("kind0004", kind0004);
-//							break;
-//						case 5:
-//							String kind0005 = kind.getBoardGameStyle();
-//							typeList.put("kind0005", kind0005);
-//							break;
-//						case 6:
-//							String kind0006 = kind.getBoardGameStyle();
-//							typeList.put("kind0006", kind0006);
-//							break;
-//						case 7:
-//							String kind0007 = kind.getBoardGameStyle();
-//							typeList.put("kind0007", kind0007);
-//							break;
-//						case 8:
-//							String kind0008 = kind.getBoardGameStyle();
-//							typeList.put("kind0008", kind0008);
-//							break;
-//						case 9:
-//							String kind0009 = kind.getBoardGameStyle();
-//							typeList.put("kind0009", kind0009);
-//							break;
-//						case 10:
-//							String kind0010 = kind.getBoardGameStyle();
-//							typeList.put("kind0010", kind0010);
-//							break;
-//						}
-//						o2++;
-//					}
-//					break;
-//				case 10:
-//					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
-//					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
-//					int o2 = 0;
-//					for (Integer t : type) {
-//						BoardGameKind kind = bgkdao.findByPrimeKey(t);
-//						switch (o2) { // 找到的類型放進typeList
-//						case 0:
-//							String kind0000 = kind.getBoardGameStyle();
-//							typeList.put("kind0000", kind0000);
-//							break;
-//						case 1:
-//							String kind0001 = kind.getBoardGameStyle();
-//							typeList.put("kind0001", kind0001);
-//							break;
-//						case 2:
-//							String kind0002 = kind.getBoardGameStyle();
-//							typeList.put("kind0002", kind0002);
-//							break;
-//						case 3:
-//							String kind0003 = kind.getBoardGameStyle();
-//							typeList.put("kind0003", kind0003);
-//							break;
-//						case 4:
-//							String kind0004 = kind.getBoardGameStyle();
-//							typeList.put("kind0004", kind0004);
-//							break;
-//						case 5:
-//							String kind0005 = kind.getBoardGameStyle();
-//							typeList.put("kind0005", kind0005);
-//							break;
-//						case 6:
-//							String kind0006 = kind.getBoardGameStyle();
-//							typeList.put("kind0006", kind0006);
-//							break;
-//						case 7:
-//							String kind0007 = kind.getBoardGameStyle();
-//							typeList.put("kind0007", kind0007);
-//							break;
-//						case 8:
-//							String kind0008 = kind.getBoardGameStyle();
-//							typeList.put("kind0008", kind0008);
-//							break;
-//						case 9:
-//							String kind0009 = kind.getBoardGameStyle();
-//							typeList.put("kind0009", kind0009);
-//							break;
-//						case 10:
-//							String kind0010 = kind.getBoardGameStyle();
-//							typeList.put("kind0010", kind0010);
-//							break;
-//						}
-//						o2++;
-//					}
-//					break;
+				case 8:
+					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
+					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
+					int o8 = 0;
+					for (Integer t : type) {
+						BoardGameKind kind = bgkdao.findByPrimeKey(t);
+						switch (o8) { // 找到的類型放進typeList
+						case 0:
+							String kind0000000000 = kind.getBoardGameStyle();
+							typeList.put("kind0000000000", kind0000000000);
+							break;
+						case 1:
+							String kind0000000001 = kind.getBoardGameStyle();
+							typeList.put("kind0000000001", kind0000000001);
+							break;
+						case 2:
+							String kind0000000002 = kind.getBoardGameStyle();
+							typeList.put("kind0000000002", kind0000000002);
+							break;
+						case 3:
+							String kind0000000003 = kind.getBoardGameStyle();
+							typeList.put("kind0000000003", kind0000000003);
+							break;
+						case 4:
+							String kind0000000004 = kind.getBoardGameStyle();
+							typeList.put("kind0000000004", kind0000000004);
+							break;
+						case 5:
+							String kind0000000005 = kind.getBoardGameStyle();
+							typeList.put("kind0000000005", kind0000000005);
+							break;
+						case 6:
+							String kind0000000006 = kind.getBoardGameStyle();
+							typeList.put("kind0000000006", kind0000000006);
+							break;
+						case 7:
+							String kind0000000007 = kind.getBoardGameStyle();
+							typeList.put("kind0000000007", kind0000000007);
+							break;
+						case 8:
+							String kind0000000008 = kind.getBoardGameStyle();
+							typeList.put("kind0000000008", kind0000000008);
+							break;
+						case 9:
+							String kind0000000009 = kind.getBoardGameStyle();
+							typeList.put("kind0000000009", kind0000000009);
+							break;
+						case 10:
+							String kind0000000010 = kind.getBoardGameStyle();
+							typeList.put("kind0000000010", kind0000000010);
+							break;
+						}
+						o8++;
+					}
+					break;
+				case 9:
+					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
+					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
+					int o9 = 0;
+					for (Integer t : type) {
+						BoardGameKind kind = bgkdao.findByPrimeKey(t);
+						switch (o9) { // 找到的類型放進typeList
+						case 0:
+							String kind00000000000 = kind.getBoardGameStyle();
+							typeList.put("kind00000000000", kind00000000000);
+							break;
+						case 1:
+							String kind00000000001 = kind.getBoardGameStyle();
+							typeList.put("kind00000000001", kind00000000001);
+							break;
+						case 2:
+							String kind00000000002 = kind.getBoardGameStyle();
+							typeList.put("kind00000000002", kind00000000002);
+							break;
+						case 3:
+							String kind00000000003 = kind.getBoardGameStyle();
+							typeList.put("kind0000000003", kind00000000003);
+							break;
+						case 4:
+							String kind00000000004 = kind.getBoardGameStyle();
+							typeList.put("kind00000000004", kind00000000004);
+							break;
+						case 5:
+							String kind00000000005 = kind.getBoardGameStyle();
+							typeList.put("kind00000000005", kind00000000005);
+							break;
+						case 6:
+							String kind00000000006 = kind.getBoardGameStyle();
+							typeList.put("kind00000000006", kind00000000006);
+							break;
+						case 7:
+							String kind00000000007 = kind.getBoardGameStyle();
+							typeList.put("kind00000000007", kind00000000007);
+							break;
+						case 8:
+							String kind00000000008 = kind.getBoardGameStyle();
+							typeList.put("kind00000000008", kind00000000008);
+							break;
+						case 9:
+							String kind00000000009 = kind.getBoardGameStyle();
+							typeList.put("kind00000000009", kind00000000009);
+							break;
+						case 10:
+							String kind00000000010 = kind.getBoardGameStyle();
+							typeList.put("kind00000000010", kind00000000010);
+							break;
+						}
+						o9++;
+					}
+					break;
+				case 10:
+					groupSerialNumber = vo.getGroupSerialNumber();// 取得每一個的團編號
+					type = gcgdao.findByGroupSerialNumber(groupSerialNumber);// 團裡所選桌遊類型編號
+					int o10 = 0;
+					for (Integer t : type) {
+						BoardGameKind kind = bgkdao.findByPrimeKey(t);
+						switch (o10) { // 找到的類型放進typeList
+						case 0:
+							String kind000000000000 = kind.getBoardGameStyle();
+							typeList.put("kind000000000000", kind000000000000);
+							break;
+						case 1:
+							String kind000000000001 = kind.getBoardGameStyle();
+							typeList.put("kind000000000001", kind000000000001);
+							break;
+						case 2:
+							String kind000000000002 = kind.getBoardGameStyle();
+							typeList.put("kind000000000002", kind000000000002);
+							break;
+						case 3:
+							String kind000000000003 = kind.getBoardGameStyle();
+							typeList.put("kind000000000003", kind000000000003);
+							break;
+						case 4:
+							String kind000000000004 = kind.getBoardGameStyle();
+							typeList.put("kind000000000004", kind000000000004);
+							break;
+						case 5:
+							String kind000000000005 = kind.getBoardGameStyle();
+							typeList.put("kind000000000005", kind000000000005);
+							break;
+						case 6:
+							String kind000000000006 = kind.getBoardGameStyle();
+							typeList.put("kind000000000006", kind000000000006);
+							break;
+						case 7:
+							String kind000000000007 = kind.getBoardGameStyle();
+							typeList.put("kind000000000007", kind000000000007);
+							break;
+						case 8:
+							String kind000000000008 = kind.getBoardGameStyle();
+							typeList.put("kind000000000008", kind000000000008);
+							break;
+						case 9:
+							String kind000000000009 = kind.getBoardGameStyle();
+							typeList.put("kind000000000009", kind000000000009);
+							break;
+						case 10:
+							String kind000000000010 = kind.getBoardGameStyle();
+							typeList.put("kind000000000010", kind000000000010);
+							break;
+						}
+						o10++;
+					}
+					break;
 				}
 				i++;
 			}
 			session.setAttribute("memgroupall", memgroupall);// 已加入的團資訊
 			session.setAttribute("typeList", typeList);// 該團所選的桌遊類型
 			session.setAttribute("map_count", map);// 該團已加入的人數
+			session.setAttribute("choiceGames", choiceGames);
 
 			response.sendRedirect("home.jsp");
 		} else {

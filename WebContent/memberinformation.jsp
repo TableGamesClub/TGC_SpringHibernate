@@ -638,7 +638,64 @@ li.MemInfo {
 					</div>
 					<div class="groupgamename">
 						<center>
-							<p style="font-size: 20px; padding-top: 15px">遊戲名稱:</p>
+							<p style="font-size: 20px; padding-top: 15px">
+								遊戲名稱:
+								<c:if test="${temp1==0}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices0}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==1}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices1}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==2}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices2}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==3}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices3}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==4}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices4}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==5}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices5}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==6}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices6}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==7}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices7}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==8}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices8}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==9}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices9}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+								<c:if test="${temp1==10}">
+									<c:forEach var="GroupChoiceGames"
+										items="${choiceGames.choices10}">${GroupChoiceGames.boardGameName}<span>,</span>
+									</c:forEach>
+								</c:if>
+							</p>
 						</center>
 					</div>
 				</div>
